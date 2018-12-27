@@ -60,9 +60,9 @@ class pixel {
   
 //Carpeta en la que guardamos las imagenes
 String FOLDERROOT = "Pictures/";
-uint8_t max_img = 100;
+uint8_t max_img = 40;
 uint8_t image_counter = 0;
-unsigned long auxtimer;
+unsigned long auxtimer, colortimer;
   
 //Creamos un vector de pixeles
 pixel pixelvector[ pixelsize ];
@@ -81,6 +81,13 @@ void setup() {
     Serial.println("SD No Init");
     
   }
+  String filename = FOLDERROOT +"A_0.bmp";
+      
+    Serial.print("Picture ");Serial.print(filename);Serial.println(" exists");
+    int len = 30;
+    char filecharname[len];
+    filename.toCharArray(filecharname, len);
+    bmpDraw(filecharname , 0, 0);
     
    //Configuraciones iniciales de cada pixel
   for(int i = 0 ; i< pixelsize ;i++){ pixelvector[i].setbckgColour(tft); 
@@ -113,7 +120,17 @@ void setup() {
     for(int i = 0 ; i< pixelsize ;i++){ 
       pixelvector[i].move ( random(-3,3) , random(0,5)); 
       pixelvector[i].draw( tft ); 
+      //pixelvector[i].setColour( WHITE ); 
     } 
+
+    if( millis() - colortimer > 500){
+      for(int i = 0 ; i< pixelsize ;i++){ 
+        colortimer = millis();
+       // pixelvector[i].setColour( tft.color565( random(0,255) , random(0,255), random(0,255)  ) ); 
+        pixelvector[i].setColour( WHITE  ); 
+        pixelvector[i].setXColour( RED );
+      }
+    }
     delay(50);
 } 
   
