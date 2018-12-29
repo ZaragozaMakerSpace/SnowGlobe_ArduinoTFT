@@ -1,4 +1,4 @@
-#define BLACK   0x0001
+#define BLACK   0x0000
 #define BLUE    0x001F
 #define RED     0xF800
 #define GREEN   0x07E0
@@ -8,7 +8,7 @@
 #define ROSE  0xF81F
 #define WHITE   0xFFFF
   
-#define TFT_SD 10
+#define TFT_SD 8
 #define pixelsize 30
   
 #include <SPI.h>
